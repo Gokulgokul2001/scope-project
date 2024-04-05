@@ -1,0 +1,22 @@
+@charset "UTF-8";
+form{
+	 
+	 border: 2px solid black;
+	 left:40%;
+	 margin-left: 30%;
+	 margin-right: 30%;
+	 margin-top: 30px;
+	 padding: 5%; 
+}
+.signup{
+	width: 400px;
+	height: 30px;
+	text-align: left;
+	}
+label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
+}
+

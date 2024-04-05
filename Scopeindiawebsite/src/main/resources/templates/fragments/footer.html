@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}" href="/css/footer.css" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+<div style="background-color:#050a4c;">
+<footer id="foot" th:fragment="footer">
+    <div id="grid1">
+        <div class="child1"><span style="color: skyblue;font-size: 30px;"><b>1000</b></span><span style="color: skyblue;font-size: 20px;"><b>+</b></span><br><span style="color: white;"><b>STUDENTS ARE</b><br><b>TRAINED EVERY YEAR</b></span></div>
+        <div class="child2"><span style="color: skyblue;font-size: 30px;"><b>30</b></span><span style="color: skyblue;font-size: 20px;"><b>+</b></span><br><span style="color: white;"><b>COMPUTER COURSES</b></span></div>
+        <div class="child3"><span style="color: skyblue;font-size: 30px;"><b>95</b></span><span style="color: skyblue;font-size: 20px;"><b>%</b></span><br><span style="color: white;"><b>STUDENTS ARE GETTING</b><br><b>PLACED EVERY YEAR</b></span></div>
+    </div>
+    <section>
+        <div>
+            <img th:src="@{/images/scope5.png}" style="display: block;margin: 0 auto;padding-top: 30px;max-width: 100%;height: auto;">
+        </div>
+    </section>
+    <section>
+        <div id="grid2">
+            <div><img th:src="@{/images/bottom.png}" style="height:150px;width:450px;display: block;margin-left:100%;"></div>
+        </div>
+    </section>
+    <section>
+        <p style="text-align: center;color: lightblue;">All Rights Reserved<span style="color: white;"> Suffix E Solutions </span>© 2007-2023</p>
+    </section>
+    <section>
+        <div id="grid3">
+            <div><a href="tel:9745936073 (TVM)" style="color: white; text-decoration: none;">9745936073 (TVM)</a></div>
+            <div><a href="tel:7592939481 (EKM)" style="color: white;text-decoration: none;">7592939481 (EKM)</a></div>
+            <div><a href="tel:8075536185 (NGL)" style="color: white;text-decoration: none;">8075536185 (NGL)</a></div>
+            <div><a href="mailto:info@scopeindia.org?" style="color: white;text-decoration: none;">info@scopeindia.org</a></div>
+        </div>
+    </section>
+</footer>
+</div>
+</body>
+</html>

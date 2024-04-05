@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style>   
+.glow {
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
+  text-decoration: underline;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #5c9df3, 0 0 40px #5c9df3, 0 0 50px #5c9df3, 0 0 60px #5c9df3, 0 0 70px #5c9df3;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}</style>
+</head>
+<body>
+<div class="container-fluid" id="regform" style="background-image: linear-gradient(135deg, #acb6e5 10%, #86fde8 100%);">
+    <h2 class="glow">Edit Registration Form</h2>
+    <form th:action="@{/updateProfile}" th:object="${registrationForm}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}">
+        <div class="row justify-content-center">
+            <div class="col-md-5" style="border:2px solid black;margin: 50px;padding:20px" id="form1">
+                <label>First Name (required)</label><br>
+                <input class="form-control" type="text" name="firstname" th:field="*{firstname}" required><br>
+                <label>Last Name (required)</label><br>
+                <input class="form-control" type="text" name="lastname" th:field="*{lastname}" required><br>
+                <label>Gender (required)</label><br>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="male" name="gender" value="male" th:checked="${registrationForm.gender == 'male'}">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="female" name="gender" value="female" th:checked="${registrationForm.gender == 'female'}">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="other" name="gender" value="other" th:checked="${registrationForm.gender == 'other'}">
+                    <label class="form-check-label" for="other">Other</label>
+                </div><br>
+                <label>Date of Birth (required)</label><br>
+               <input class="form-control" type="date" name="dateofbirth" th:field="*{dateofbirth}" required pattern="\d{4}-\d{2}-\d{2}"><br>
+                <label>Email (required)</label><br>
+                <input class="form-control" type="email" name="email" th:field="*{email}" required><br>
+            </div>
+            <div class="col-md-5" style="border:2px solid black;margin: 50px;padding:20px" id="form2">
+                <label>Mobile Number (required)</label><br>
+                <input class="form-control" type="tel" name="phone" th:field="*{phone}" required><br>
+                <label>Hobbies (required)</label><br>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hobby1" name="hobbies" value="playing" th:checked="${registrationForm.hobbies.contains('playing')}">
+                    <label class="form-check-label" for="hobby1">Playing</label><br>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hobby2" name="hobbies" value="reading" th:checked="${registrationForm.hobbies.contains('reading')}">
+                    <label class="form-check-label" for="hobby2">Reading</label><br>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hobby3" name="hobbies" value="travel" th:checked="${registrationForm.hobbies.contains('travel')}">
+                    <label class="form-check-label" for="hobby3">Travel</label><br>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hobby4" name="hobbies" value="dancing" th:checked="${registrationForm.hobbies.contains('dancing')}">
+                    <label class="form-check-label" for="hobby4">Dancing</label><br>
+                </div>
+                        <label>Country</label><br>
+                <select id="country" class="form-control" name="country" onchange="fetchStates()" th:field="*{country}">
+                    <option value="">Select Country</option>
+                    <option value="INDIA">India</option>
+                    <option value="AUS">Australia</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                </select><br>
+                <label>State</label><br>
+                <select id="state" class="form-control" name="state" onchange="fetchCities()" th:field="*{state}">
+                    <option value="">Select State</option>
+                    <option value="TN">Tamil Nadu</option>
+                    <option value="KER">Kerala</option>
+                    <option value="MUM">Maharashtra</option>
+                    <option value="NSW">New South Wales</option>
+                    <option value="VIC">Victoria</option>
+                    <option value="QLD">Queensland</option>
+                    <option value="CA">California</option>
+                    <option value="NY">New York</option>
+                    <option value="TX">Texas</option>
+                    <option value="ONT">Ontario</option>
+                    <option value="QUE">Quebec</option>
+                    <option value="BC">British Columbia</option>
+                </select><br>
+                <label>City</label><br>
+                <select id="city" class="form-control" name="city" th:field="*{city}">
+                    <option value="">Select City</option>
+                    <option value="CHE">Chennai</option>
+                    <option value="COVAI">Coimbatore</option>
+                    <option value="MAD">Madurai</option>
+                    <option value="NGL">Nagercoil</option>
+                    <option value="TVM">Thiruvananthapuram</option>
+                    <option value="KOCHI">Kochi</option>
+                    <option value="KOZ">Kozhikode</option>
+                    <option value="MUM">Mumbai</option>
+                    <option value="PUN">Pune</option>
+                    <option value="NGP">Nagpur</option>
+                    <option value="SYD">Sydney</option>
+                    <option value="NCL">Newcastle</option>
+                    <option value="WOL">Wollongong</option>
+                    <option value="LA">Los Angeles</option>
+                    <option value="NYC">New York City</option>
+                    <option value="HOU">Houston</option>
+                    <option value="TOR">Toronto</option>
+                    <option value="MON">Montreal</option>
+                    <option value="VAN">Vancouver</option>
+                </select><br>
+                <label>Photo</label><br>
+                <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required><br>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" style="text-align: center;padding: 20px;margin:20px; width: 500px;font-weight: bold;margin-left:30%; font-size: 20px">Save Changes</button>
+    </form>
+
+</div>
+<script>
+    function fetchStates() {
+        var country = document.getElementById("country").value;
+        var stateDropdown = document.getElementById("state");
+        stateDropdown.innerHTML = '<option value="">Select State</option>';
+        if (country === "INDIA") {
+            var states = ["Tamil Nadu", "Kerala", "Maharashtra"];
+            states.forEach(state => {
+                var option = document.createElement("option");
+                option.text = state;
+                option.value = state;
+                stateDropdown.add(option);
+            });
+        } else if (country === "AUS") {
+            var states = ["New South Wales", "Victoria", "Queensland"];
+            states.forEach(state => {
+                var option = document.createElement("option");
+                option.text = state;
+                option.value = state;
+                stateDropdown.add(option);
+            });
+        } else if (country === "US") {
+            var states = ["California", "New York", "Texas"];
+            states.forEach(state => {
+                var option = document.createElement("option");
+                option.text = state;
+                option.value = state;
+                stateDropdown.add(option);
+            });
+        } else if (country === "CA") {
+            var states = ["Ontario", "Quebec", "British Columbia"];
+            states.forEach(state => {
+                var option = document.createElement("option");
+                option.text = state;
+                option.value = state;
+                stateDropdown.add(option);
+            });
+        }
+    }
+
+    function fetchCities() {
+        var state = document.getElementById("state").value;
+        var cityDropdown = document.getElementById("city");
+        cityDropdown.innerHTML = '<option value="">Select City</option>';
+        if (state === "Tamil Nadu") {
+            var cities = ["Chennai", "Coimbatore", "Madurai", "Nagercoil"];
+            cities.forEach(city => {
+                var option = document.createElement("option");
+                option.text = city;
+                option.value = city;
+                cityDropdown.add(option);
+            });
+        } else if (state === "Kerala") {
+            var cities = ["Thiruvananthapuram", "Kochi", "Kozhikode"];
+            cities.forEach(city => {
+                var option = document.createElement("option");
+                option.text = city;
+                option.value = city;
+                cityDropdown.add(option);
+            });
+        } else if (state === "Maharashtra") {
+            var cities = ["Mumbai", "Pune", "Nagpur"];
+            cities.forEach(city => {
+                var option = document.createElement("option");
+                option.text = city;
+                option.value = city;
+                cityDropdown.add(option);
+            });
+        } else if (state === "New South Wales") {
+            var cities = ["Sydney", "Newcastle", "Wollongong"];
+            cities.forEach(city => {
+                var option = document.createElement("option");
+                option.text = city;
+                option.value = city;
+                cityDropdown.add(option);
+            });
+        }
+    }
+</script>

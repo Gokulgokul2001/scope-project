@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Example</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0; 
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            background: linear-gradient(to bottom right, #2e2e2e, #1a1a1a);
+            background-repeat: no-repeat;
+        }
+
+        .row {
+            margin-left: 250px;
+            padding: 20px;
+            display: flex;
+        }
+
+        .col-12 {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10%;
+        }
+        #dash{
+        height: 150px;
+        width: 200px;
+        margin-left: 5px;
+        margin-right: 5px;
+        top:10px;
+        }
+        a{
+        margin-left: 10px;
+        }
+        #out{
+        margin-left: 10px;
+        width: 100px;
+        }
+        #logo{
+    height: 50px;
+    width: 50px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin-left:20%; 
+}
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+	<img id="logo" th:src="@{/images/logo.png}">
+	<img id="dash" th:src="@{/images/dashboardlog.png}">
+     <div class="col" ><a class="text-decoration-none nav-title" href="/Searchcourse"><i class="fa-brands fa-searchengin"></i><span>Search for courses</span></a></div>
+      <div class="col" ><a class="text-decoration-none nav-title" href="/Pickedcourse"><i class="fa-solid fa-key"></i><span>Piced Courses</span></a></div>
+    <div class="col "  ><a class="text-decoration-none nav-title" href="/Edit"><i class="fas fa-user"></i><span>Profile Edit</span></a></div>
+      <div class="col" ><a class="text-decoration-none nav-title" href="/Changepassword"><i class="fa-solid fa-key"></i><span>Change Password</span></a></div>
+    
+    <button id="out" type="submit"><i class="material-icons">logout</i>Logout</button>
+</div>
+
+<div class="content">
+    <h1 style="color: white;text-align: center;">Student Dashboard</h1>
+</div>
+
+<div class="row">
+    <div class="col-12 bg-success">
+        <h1>Students</h1>
+        <h2>Total Students</h2>
+        <h3>300+</h3>
+    </div>
+    <div class="col-12 bg-primary"> 
+        <h1>Courses</h1>
+        <h2>Total Courses </h2>
+        <h3>25+courses</h3>
+    </div>
+    <div class="col-12 bg-danger">
+        <h1>Placement Results</h1>
+        <h2>Recent Placement</h2>
+        <h3>97%</h3>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    var logoutButton = document.getElementById('out');
+
+    logoutButton.addEventListener('click', function() {
+        fetch('/logout', {
+            method: 'POST'
+        })
+        .then(response => {
+            window.location.href = '/Login'; 
+        })
+        .catch(error => {
+            console.error('Error logging out:', error);
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+    <link rel="stylesheet" th:href="@{/css/Knowscope.css}" />
+          <link rel="stylesheet"  th:href="@{/css/header.css}" />
+    <link rel="stylesheet"  th:href="@{/css/footer.css}" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="parent">
+	   <div th:replace="fragments/header :: header"></div>
+
+    <section>
+        <div class="middle">
+            <h1 class="text-center" style="color: gold;font-size: 60px;">SCOPE INDIA, your career partner!</h1><br><br>
+            <p class="text-center text-antique-white fs-35 text-indent-60 text-justify-line-inter word-line-height-30" style="color:white;font-size: 30px;"><b>One of the best Training Destination for Software, Networking and Cloud Computing courses in India with 17 years of Industrial experience.</b></p><br><br>
+            <div>
+                <p class="text-antique-white fs-20 line-height-30" style="color:white;">Software, Networking, and Cloud Professional Education Centre in Kerala from Suffix E Solutions with WORKING PROFESSIONALS oriented on-the-job TRAINING model. SCOPE INDIA provides courses for <b>Software Programming</b> in Python (Data Science | Artificial Intelligence | Machine Learning | Deep Learning), Java, PHP, .Net, <b>Software Testing</b> Manual and Automation, <b>Cloud</b> in AWS, Azure, <b>Server Administration </b> MCSE, and RHCE, <b>CCNA</b>,<b> Mobile App Development </b>in Flutter, and, <b>Digital Marketing</b>. Training with 100% Trusted Job Based Internship Model. SCOPE INDIA has a Strong Placement Cell that provides jobs to 1000's of students every year. We assure you, you won't regret it after training from SCOPE INDIA!</p><br><br>
+            </div>
+            <div>
+                <p class="text-antique-white fs-20 text-center" style="color:white;">This is how SCOPE INDIA can support both newbies and experienced in the industry to upgrade their skills.</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container text-center">
+            <img src="images/5star.png" class="img-fluid" alt="5 Star Rating" style="width: 300px;height: 100px;">
+            <p class="text-antique-white" style="color:white;">Google 4.9 * Rated Institute</p>
+        </div>
+    </section>
+ 
+  <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</body>
+</html>

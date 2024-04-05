@@ -1,0 +1,28 @@
+footer {
+    height: auto;
+    background-color: darkblue;
+    padding: 20px;
+}
+
+#grid1, #grid2, #grid3 {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.child1, .child2, .child3 {
+    padding: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 768px) {
+    #grid1, #grid2, #grid3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

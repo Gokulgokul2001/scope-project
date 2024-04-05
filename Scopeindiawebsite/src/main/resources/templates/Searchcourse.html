@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Sign-Up</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #out {
+            margin-left: 10px;
+            width: 100px;
+        }
+
+        #logo {
+            height: 50px;
+            width: 50px;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            margin-left: 20%;
+        }
+
+        #dash {
+            height: 150px;
+            width: 200px;
+            margin-left: 5px;
+            margin-right: 5px;
+            top: 10px;
+        }
+
+        a {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <img id="logo" th:src="@{/images/logo.png}">
+    <img id="dash" th:src="@{/images/dashboardlog.png}">
+    <div class="col"><a class="text-decoration-none nav-title" href="/Searchcourse"><i
+            class="fa-brands fa-searchengin"></i><span>Search for courses</span></a></div>
+    <div class="col"><a class="text-decoration-none nav-title" href="/Pickedcourse"><i
+            class="fa-solid fa-key"></i><span>Picked Courses</span></a></div>
+    <div class="col "><a class="text-decoration-none nav-title" href="/Edit"><i class="fas fa-user"></i><span>Profile
+                Edit</span></a></div>
+    <div class="col"><a class="text-decoration-none nav-title" href="/Changepassword"><i
+            class="fa-solid fa-key"></i><span>Change Password</span></a></div>
+</div>
+
+<div class="content">
+    <h1 style="color:black;text-align:center;">Courses</h1>
+    <input type="text" id="courseSearch" placeholder="Search for a course..." style="margin-bottom: 10px;">
+    <table id="courseTable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Duration</th>
+            <th>Fee</th>
+            <th>CourseName</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.id}"></td>
+            <td th:text="${course.duration}"></td>
+            <td th:text="${course.fee}"></td>
+            <td th:text="${course.name}"></td>
+			<td>
+    			<button onclick="selectCourse('${course.id}', '${course.name}', '${course.duration}', '${course.fee}')">Select</button>
+</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function filterCourses() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("courseSearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("courseTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    var inputField = document.getElementById("courseSearch");
+    inputField.addEventListener("input", filterCourses);
+    function selectCourse(id, name, duration, fee) {
+        var url = "/Pickedcourse?id=" + encodeURIComponent(id) + "&name=" + encodeURIComponent(name) + "&duration=" + encodeURIComponent(duration) + "&fee=" + encodeURIComponent(fee);
+        window.location.href = url;
+    }
+    function filterCourses() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("courseSearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("courseTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    var inputField = document.getElementById("courseSearch");
+    inputField.addEventListener("input", filterCourses);
+ 
+    function selectCourse(id, name, duration, fee) {
+        var xhr = new XMLHttpRequest();
+        var url = "/api/pickCourse";
+        var params = "id=" + encodeURIComponent(id) + "&name=" + encodeURIComponent(name) + "&duration=" + encodeURIComponent(duration) + "&fee=" + encodeURIComponent(fee);
+        
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                window.location.href = "/Pickedcourse";
+            }
+        }
+
+        xhr.send(params);
+    }
+</script>
+
+
+</body>
+</html>
